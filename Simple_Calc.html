@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Animated Simple Calculator</title>
+  <style>
+    body {
+      background: #1e1e2f;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+      color: #fff;
+    }
+
+    .calculator {
+      background: #2e2e3e;
+      padding: 30px;
+      border-radius: 20px;
+      box-shadow: 0 0 20px rgba(0,255,170,0.3);
+      width: 320px;
+      animation: fadeIn 1s ease-in-out;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: scale(0.9); }
+      to { opacity: 1; transform: scale(1); }
+    }
+
+    .calculator input {
+      width: 100%;
+      padding: 15px;
+      margin-bottom: 15px;
+      font-size: 1.2rem;
+      border-radius: 10px;
+      border: none;
+      outline: none;
+      background: #444;
+      color: #fff;
+      transition: 0.3s ease;
+    }
+
+    .calculator input:focus {
+      box-shadow: 0 0 10px #00ffaa;
+    }
+
+    .calculator button {
+      width: 100%;
+      padding: 15px;
+      font-size: 1.2rem;
+      background: #00ffaa;
+      color: #000;
+      border: none;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: transform 0.2s;
+    }
+
+    .calculator button:hover {
+      transform: scale(1.05);
+    }
+
+    .calculator .result {
+      margin-top: 20px;
+      font-size: 1.3rem;
+      text-align: center;
+      color: #ffd700;
+      min-height: 30px;
+    }
+  </style>
+</head>
+<body>
+
+  <div class="calculator">
+    <input type="number" id="num1" placeholder="Enter first number" />
+    <input type="number" id="num2" placeholder="Enter second number" />
+    <button onclick="addNumbers()">➕ Add Numbers</button>
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function addNumbers() {
+      const n1 = parseFloat(document.getElementById('num1').value);
+      const n2 = parseFloat(document.getElementById('num2').value);
+      const resultBox = document.getElementById('result');
+
+      if (!isNaN(n1) && !isNaN(n2)) {
+        const sum = n1 + n2;
+        resultBox.textContent = `Result: ${sum}`;
+      } else {
+        resultBox.textContent = "Please enter valid numbers.";
+      }
+    }
+  </script>
+
+</body>
+</html>
