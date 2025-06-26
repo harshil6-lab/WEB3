@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Guess Your Birthday</title>
+  <style>
+    body {
+      background: linear-gradient(to right, #0f2027, #203a43, #2c5364);
+      color: white;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
+
+    .container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 30px;
+      border-radius: 15px;
+      box-shadow: 0 0 20px rgba(0,0,0,0.5);
+      width: 400px;
+      text-align: center;
+      backdrop-filter: blur(8px);
+    }
+
+    input[type="number"] {
+      width: 80%;
+      padding: 10px;
+      margin-top: 15px;
+      border: none;
+      border-radius: 8px;
+      font-size: 16px;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 10px 20px;
+      background-color: #00c6ff;
+      color: white;
+      border: none;
+      border-radius: 25px;
+      font-size: 16px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    button:hover {
+      background-color: #0072ff;
+    }
+
+    #result {
+      margin-top: 25px;
+      font-size: 20px;
+      color: #ffe600;
+    }
+
+    ol {
+      text-align: left;
+      margin-top: 15px;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>🧠 I Will Guess Your Birthday!</h2>
+    <p>Follow these steps carefully:</p>
+    <ol>
+      <li>Multiply your <strong>birth month</strong> by 5.</li>
+      <li>Add 6 to the result.</li>
+      <li>Multiply that by 4.</li>
+      <li>Add 9.</li>
+      <li>Multiply that by 5.</li>
+      <li>Add your <strong>birth day</strong>.</li>
+    </ol>
+
+    <p>Now enter your final result below:</p>
+    <input type="number" id="userInput" placeholder="Enter your final number">
+    <button onclick="revealBirthday()">Guess My Birthday 🎉</button>
+    <div id="result"></div>
+  </div>
+
+  <script>
+    function revealBirthday() {
+      const userInput = parseInt(document.getElementById('userInput').value);
+      if (isNaN(userInput) || userInput < 100) {
+        document.getElementById('result').innerText = "Please enter a valid number!";
+        return;
+      }
+
+      // Reverse the operations
+      let step1 = userInput - 165;
+      let month = Math.floor(step1 / 100);
+      let day = step1 % 100;
+
+      const months = [
+        "January", "February", "March", "April", "May", "June",
+        "July", "August", "September", "October", "November", "December"
+      ];
+
+      let birthday = "";
+
+      if (month >= 1 && month <= 12 && day >= 1 && day <= 31) {
+        birthday = `${months[month - 1]} ${day}`;
+        document.getElementById('result').innerText = `🎂 Your birthday is: ${birthday}!`;
+      } else {
+        document.getElementById('result').innerText = "Hmm... something doesn't add up. Double check your math!";
+      }
+    }
+  </script>
+</body>
+</html>
