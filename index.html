@@ -1,28 +1,116 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <title>Learning</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Ex Calc</title>
   <style>
-   #x{
-      color: orange;
-   }
-   .y{
-      color: white;
-   } 
-   
-   body{
-    background-color: black;
-   }
+    body {
+      background-color: #000;
+      color: #fff;
+      font-family: 'Segoe UI', sans-serif;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      margin: 0;
+    }
 
+    .calculator {
+      background-color: #111;
+      border: 2px solid #fff;
+      padding: 30px;
+      border-radius: 12px;
+      width: 350px;
+    }
+
+    h2 {
+      text-align: center;
+      margin-bottom: 20px;
+    }
+
+    input, button {
+      width: 100%;
+      padding: 10px;
+      margin: 8px 0;
+      font-size: 14px;
+      border: none;
+      border-radius: 5px;
+    }
+
+    input {
+      background-color: #222;
+      color: white;
+    }
+
+    button {
+      background-color: white;
+      color: black;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .result {
+      margin-top: 20px;
+      font-size: 14px;
+      white-space: pre-line;
+      line-height: 1.6;
+    }
   </style>
 </head>
 <body>
-   <div id="x"><h1>MERA</h1></div>
-   <div class="y"><h2>BHARAT</h2></div>
-   <div class="y"><h3>MAHAN</h3></div>
-   <hr>
-   <button id ="click" onclick="alert('i am click')">CLICK ME RIGHT NOW</button>
+
+  <div class="calculator">
+    <h2>Ex Calc</h2>
+    
+    <input type="number" id="basePrice" placeholder="Base Price (AUD)" step="0.01" />
+    <input type="number" id="shippingCost" placeholder="Shipping Cost (AUD)" step="0.01" />
+    <input type="number" id="adsCost" placeholder="Ads Cost per Sale (AUD)" step="0.01" />
+    <input type="number" id="totalRevenue" placeholder="Total Revenue (AUD)" step="0.01" />
+    <input type="number" id="orders" placeholder="Total Orders (Today)" />
+
+    <button onclick="calculate()">Calculate</button>
+
+    <div class="result" id="result"></div>
+  </div>
+
+  <script>
+    function calculate() {
+      const basePrice = parseFloat(document.getElementById("basePrice").value);
+      const shippingCost = parseFloat(document.getElementById("shippingCost").value);
+      const adsCost = parseFloat(document.getElementById("adsCost").value);
+      const totalRevenue = parseFloat(document.getElementById("totalRevenue").value);
+      const orders = parseInt(document.getElementById("orders").value);
+
+      if (isNaN(basePrice) || isNaN(shippingCost) || isNaN(adsCost) || isNaN(totalRevenue) || isNaN(orders)) {
+        document.getElementById("result").innerText = "⚠️ Please enter all fields correctly.";
+        return;
+      }
+
+      const costPerItem = basePrice + shippingCost + adsCost;
+      const totalCost = costPerItem * orders;
+      const profit = totalRevenue - totalCost;
+      const loss = profit < 0 ? -profit : 0;
+      const actualProfit = profit > 0 ? profit : 0;
+      const suggestedRetail = (costPerItem * 1.5).toFixed(2);
+
+      document.getElementById("result").innerText = `
+Base Price: AUD ${basePrice.toFixed(2)}
+Shipping Cost: AUD ${shippingCost.toFixed(2)}
+Ads Cost per Sale: AUD ${adsCost.toFixed(2)}
+
+Total Cost per Item: AUD ${costPerItem.toFixed(2)}
+Orders Today: ${orders}
+Total Revenue: AUD ${totalRevenue.toFixed(2)}
+
+Total Cost: AUD ${totalCost.toFixed(2)}
+Total Profit: AUD ${actualProfit.toFixed(2)}
+Total Loss: AUD ${loss.toFixed(2)}
+
+💡 Suggested Retail Price (50% Profit): AUD ${suggestedRetail}
+      `;
+    }
+  </script>
+
 </body>
-<script src="index.js">
-</script>
 </html>

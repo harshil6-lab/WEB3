@@ -1,0 +1,12 @@
+{
+  "name": "ex-calc",
+  "version": "1.0.0",
+  "description": "Excelux Profit Calculator Desktop App",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron ."
+  },
+  "devDependencies": {
+    "electron": "^29.0.0"
+  }
+}
