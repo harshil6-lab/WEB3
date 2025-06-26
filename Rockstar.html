@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>RockAi - ChatGPT Powered</title>
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: radial-gradient(ellipse at top, #0f0f0f, #000000);
+      color: #fff;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      padding: 20px;
+    }
+    .container {
+      background: rgba(255, 255, 255, 0.05);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px;
+      max-width: 600px;
+      width: 100%;
+      text-align: center;
+      box-shadow: 0 0 30px rgba(0, 255, 255, 0.2);
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+      color: #00ffe1;
+      text-shadow: 0 0 10px #00ffe1;
+    }
+    input {
+      width: 80%;
+      padding: 15px;
+      border-radius: 10px;
+      border: none;
+      font-size: 1rem;
+      margin-bottom: 20px;
+      outline: none;
+      background: #222;
+      color: #fff;
+    }
+    button {
+      padding: 12px 25px;
+      font-size: 1rem;
+      border: none;
+      border-radius: 12px;
+      background: linear-gradient(135deg, #00ffe1, #008cba);
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: transform 0.2s ease;
+      box-shadow: 0 4px 10px rgba(0,255,255,0.4);
+    }
+    button:hover {
+      transform: scale(1.05);
+    }
+    .response {
+      margin-top: 25px;
+      font-size: 1.1rem;
+      animation: fadeIn 0.5s ease-in-out;
+      text-align: left;
+    }
+    a {
+      color: #00ffe1;
+      text-decoration: underline;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+    .typing {
+      display: inline-block;
+      border-right: 2px solid #00ffe1;
+      animation: blink 0.7s step-end infinite;
+    }
+    @keyframes blink {
+      from, to { border-color: transparent }
+      50% { border-color: #00ffe1; }
+    }
+
+    @media (max-width: 600px) {
+      input {
+        width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>🤖 RockAi</h1>
+    <input type="text" id="question" placeholder="Ask me anything..." />
+    <br>
+    <button onclick="askRockAi()">Ask RockAi</button>
+    <div class="response" id="response"></div>
+  </div>
+
+  <script>
+    async function askRockAi() {
+      const query = document.getElementById("question").value.trim();
+      const responseDiv = document.getElementById("response");
+      responseDiv.innerHTML = '<span class="typing">Thinking... 🤖</span>';
+
+      if (!query) {
+        responseDiv.innerHTML = "Please enter a question!";
+        return;
+      }
+
+      const apiKey = "YOUR_API_KEY_HERE"; // Replace with your OpenAI key
+      const apiUrl = "https://api.openai.com/v1/chat/completions";
+
+      try {
+        const res = await fetch(apiUrl, {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+            "Authorization": `Bearer ${apiKey}`
+          },
+          body: JSON.stringify({
+            model: "gpt-3.5-turbo",
+            messages: [{ role: "user", content: query }],
+            temperature: 0.7
+          })
+        });
+
+        const data = await res.json();
+        const reply = data.choices[0].message.content;
+
+        responseDiv.innerHTML = reply.replace(/\n/g, "<br>");
+      } catch (err) {
+        responseDiv.innerHTML = "Something went wrong. Please check your API key or try again.";
+        console.error(err);
+      }
+    }
+  </script>
+</body>
+</html>
