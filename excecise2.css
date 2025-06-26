@@ -1,0 +1,32 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+
+#button2{
+   background-color: #fff;
+   color: black;
+   border-radius: 20px;
+   border-color: black;
+   width:200px;
+   height:50px;
+   
+
+}
+
+.button1{
+  background-color: rgb(96, 190, 89);
+  border-radius: 20px;
+  border-color: black;
+  width:200px;
+   height:50px;
+}
+
+h2{
+   margin-right: 100px;
+   margin-left:100px;
+   margin-top:30px;
+
+}

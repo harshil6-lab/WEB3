@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="excecise2.css">
+  <link rel="stylesheet" href="excecise2.js">
+  <title>JAVA-SCRIPT</title>
+</head>
+<body>
+   <button class="button1" onclick="carQ++; document.querySelector('#cartsummery').innerText = `Your car has ` + carQ +  ` items`;"> Add to Cart</button>
+   <button id="button2 " onclick="carQ--; document.querySelector('#cartsummery').innerText = `Your car has ` + carQ +  ` items`;"  > MOVE TO WISHLIST</button>
+   <button class="button1" onclick="carQ= carQ+2; document.querySelector('#cartsummery').innerText = `Your car has ` + carQ +  ` items`;"> add 1 + 1 sale item</button>
+   <hr>
+   <h2 id="cartsummery">YOUR BAG HAS 0 ITEMS</h2>
+
+   <script>
+    let carQ = 0;
+    document.querySelector('#cartsummery').innerText = `Your car has ` + carQ +  ` items`;
+   </script>
+</body>
+</html>

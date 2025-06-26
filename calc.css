@@ -1,0 +1,36 @@
+#calc{
+  border : 2px solid rgb(26, 24, 24);
+  border-radius: 5px;
+  width : 200px;
+  height:50%;
+}
+
+body{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#display{
+  margin : 10px;
+  width :85%;
+  font-size: 30px;
+}
+
+.size{
+  width: 40px;
+  height:40px;
+  margin:2px;
+}
+
+.size:hover{
+  background-color: tomato;
+}
+
+#buttoncontainers{
+  display:flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+
+}
